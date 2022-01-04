@@ -15,6 +15,8 @@ var picx = 0, picy = 0; // image top-left offset
 var imgw = 0, imgh = 0; // image dimensions
 var fitImgw = 0, fitImgh = 0;   // image dimensions after fitting to canvas
 
+var zoomX=0, zoomY=0; //where to zoom in/out
+
 function uploadImage(e) {
     reader.onload = () => {
         img.onload = () => {
@@ -60,6 +62,25 @@ function onMouseDown(e) {
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
 }
+
+/**
+CAUTION
+
+you are now entering the realm of DrBeanuts code.
+ignore any strange styles and trust the process.
+
+**/
+
+canvas.addEventListener("mousemove", onRealMouseMove)
+function onRealMouseMove(mouse) //the other is conditional
+{
+   
+zoomX = mouse.clientX
+zoomY = mouse.clientY 
+console.log(zoomX)
+}
+
+/*DRBEANUT OVER AND OUT!*/
 
 function onMouseMove(e) {
     e.preventDefault();
@@ -112,7 +133,7 @@ function onWheel(e) {
     imgw = fitImgw * zoom;
     imgh = fitImgh * zoom;
 
-    ctx.drawImage(img, picx, picy, imgw, imgh);
+    ctx.drawImage(img, picx+zoomX, picy+zoomY, imgw, imgh);
 }
 
 function checkName() {
