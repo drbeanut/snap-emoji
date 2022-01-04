@@ -133,7 +133,7 @@ function onWheel(e) {
     imgw = fitImgw * zoom;
     imgh = fitImgh * zoom;
 
-    ctx.drawImage(img, picx+zoomX, picy+zoomY, imgw, imgh);
+    ctx.drawImage(img, picx-zoomX*zoom, picy-zoomY*zoom, imgw, imgh);
 }
 
 function checkName() {
